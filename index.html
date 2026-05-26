@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerGuard - 安卓功耗优化神器</title>
+    <meta name="description" content="PowerGuard 让你的手机更省电、更凉快、更持久。智能管控后台APP行为，不影响使用体验。">
+    <meta name="keywords" content="安卓省电,手机耗电,功耗优化,手机降温,PowerGuard,Shizuku">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            color: #333;
+            background: #f0f7ff;
+            line-height: 1.6;
+        }
+        .hero {
+            background: linear-gradient(135deg, #5BA3E6 0%, #3d8fd4 50%, #2a7bc2 100%);
+            color: white;
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: float 15s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-5%, 5%); }
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+        .hero-icon { font-size: 64px; margin-bottom: 20px; }
+        .hero h1 { font-size: 2.5em; margin-bottom: 10px; font-weight: 700; }
+        .hero p { font-size: 1.2em; opacity: 0.95; margin-bottom: 30px; }
+        .btn-download {
+            display: inline-block;
+            background: white;
+            color: #5BA3E6;
+            padding: 16px 48px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        .btn-download:active { transform: translateY(0); }
+        .version-info { margin-top: 15px; font-size: 0.85em; opacity: 0.8; }
+
+        .features {
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 40px;
+            color: #2a7bc2;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(91,163,230,0.1);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-4px); }
+        .feature-card .icon { font-size: 36px; margin-bottom: 12px; }
+        .feature-card h3 { color: #5BA3E6; margin-bottom: 8px; font-size: 1.15em; }
+        .feature-card p { color: #666; font-size: 0.95em; }
+
+        .comparison {
+            padding: 60px 20px;
+            background: white;
+        }
+        .comparison h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 40px;
+            color: #2a7bc2;
+        }
+        .compare-table {
+            max-width: 700px;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(91,163,230,0.1);
+        }
+        .compare-table th, .compare-table td {
+            padding: 14px 20px;
+            text-align: center;
+            border-bottom: 1px solid #e8f4fd;
+        }
+        .compare-table th {
+            background: #5BA3E6;
+            color: white;
+            font-weight: 600;
+        }
+        .compare-table td:first-child { text-align: left; font-weight: 500; }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-table .free { color: #52c41a; font-weight: 700; }
+        .compare-table .pro { color: #5BA3E6; font-weight: 700; }
+        .compare-table .no { color: #ccc; }
+
+        .tutorial {
+            padding: 60px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .tutorial h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 40px;
+            color: #2a7bc2;
+        }
+        .step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            align-items: flex-start;
+        }
+        .step-num {
+            background: #5BA3E6;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .step-content h4 { color: #333; margin-bottom: 4px; }
+        .step-content p { color: #666; font-size: 0.95em; }
+
+        .faq {
+            padding: 60px 20px;
+            background: white;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .faq h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 40px;
+            color: #2a7bc2;
+        }
+        .faq-item {
+            border-bottom: 1px solid #e8f4fd;
+            padding: 16px 0;
+        }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-q { font-weight: 600; color: #333; margin-bottom: 6px; }
+        .faq-a { color: #666; font-size: 0.95em; padding-left: 16px; border-left: 3px solid #5BA3E6; }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+            font-size: 0.85em;
+        }
+        .footer a { color: #5BA3E6; text-decoration: none; }
+
+        @media (max-width: 600px) {
+            .hero { padding: 50px 16px 40px; }
+            .hero h1 { font-size: 1.8em; }
+            .hero p { font-size: 1em; }
+            .btn-download { padding: 14px 36px; font-size: 1em; }
+            .features h2, .comparison h2, .tutorial h2, .faq h2 { font-size: 1.4em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-icon">🔋</div>
+        <h1>PowerGuard</h1>
+        <p>让你的手机更省电、更凉快、更持久</p>
+        <a href="#download" class="btn-download">免费下载</a>
+        <div class="version-info">v1.0.0 | Android 10+ | 无需ROOT</div>
+    </div>
+</div>
+
+<div class="features">
+    <h2>核心功能</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="icon">📊</div>
+            <h3>实时功耗监控</h3>
+            <p>功耗评分 + APP耗电排行 + CPU/内存/温度/电量全掌握</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">⚡</div>
+            <h3>一键省电</h3>
+            <p>批量优化后台APP电池策略，智能排除正在使用的APP</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🛡️</div>
+            <h3>后台行为管控</h3>
+            <p>电池策略/网络权限/自启动，逐个APP精准控制</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🌡️</div>
+            <h3>智能温控预警</h3>
+            <p>实时温度监控，超阈值自动通知，保护电池寿命</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🎨</div>
+            <h3>简洁直观界面</h3>
+            <p>淡蓝色清新设计，不懂技术也能轻松操作</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🔒</div>
+            <h3>无需ROOT</h3>
+            <p>通过Shizuku调用系统API，无线调试配对即可激活</p>
+        </div>
+    </div>
+</div>
+
+<div class="comparison">
+    <h2>免费版 vs Pro版</h2>
+    <table class="compare-table">
+        <tr>
+            <th>功能</th>
+            <th>免费版</th>
+            <th>Pro版</th>
+        </tr>
+        <tr>
+            <td>功耗监控 + 排行</td>
+            <td class="free">✓</td>
+            <td class="pro">✓</td>
+        </tr>
+        <tr>
+            <td>温度预警</td>
+            <td class="free">✓</td>
+            <td class="pro">✓</td>
+        </tr>
+        <tr>
+            <td>充电保护提醒</td>
+            <td class="free">✓</td>
+            <td class="pro">✓</td>
+        </tr>
+        <tr>
+            <td>一键省电</td>
+            <td class="no">✗</td>
+            <td class="pro">✓</td>
+        </tr>
+        <tr>
+            <td>电池策略管控</td>
+            <td class="no">✗</td>
+            <td class="pro">✓</td>
+        </tr>
+        <tr>
+            <td>网络权限管理</td>
+            <td class="no">✗</td>
+            <td class="pro">✓</td>
+        </tr>
+        <tr>
+            <td>自启动管理</td>
+            <td class="no">✗</td>
+            <td class="pro">✓</td>
+        </tr>
+    </table>
+</div>
+
+<div class="tutorial" id="download">
+    <h2>3步开始使用</h2>
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+            <h4>下载安装</h4>
+            <p>下载 APK 文件，在手机上安装（需允许未知来源）</p>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+            <h4>激活 Shizuku</h4>
+            <p>打开APP → 设置 → 激活Shizuku → 开启无线调试 → 配对完成</p>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+            <h4>一键省电</h4>
+            <p>回到首页，点击"一键省电"，享受更长续航 🎉</p>
+        </div>
+    </div>
+    <div style="text-align:center; margin-top:40px;">
+        <a href="https://github.com/431144610-afk/powerguard/releases" class="btn-download" style="background:#5BA3E6; color:white;">下载 PowerGuard v1.0</a>
+        <p style="margin-top:12px; color:#999; font-size:0.85em;">Android 10+ | 约57MB | 无需ROOT</p>
+    </div>
+</div>
+
+<div class="faq">
+    <h2>常见问题</h2>
+    <div class="faq-item">
+        <div class="faq-q">需要ROOT吗？</div>
+        <div class="faq-a">不需要。PowerGuard 通过 Shizuku 调用系统API，只需要开启无线调试配对即可，不需要ROOT。</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">Shizuku安全吗？会影响手机吗？</div>
+        <div class="faq-a">安全。Shizuku 只是让APP获得了部分系统API的调用权限，不会修改系统文件，重启手机后权限自动回收。</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">一键省电会杀后台吗？微信收不到消息怎么办？</div>
+        <div class="faq-a">不会杀后台。PowerGuard 通过修改电池策略来优化，不是强制停止APP。你可以把微信加入白名单，就不会被优化。</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">每次重启都要重新激活Shizuku？</div>
+        <div class="faq-a">是的，重启后需要重新配对一次，大概10秒钟。这是Android的安全机制，无法绕过。</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">Pro版多少钱？</div>
+        <div class="faq-a">Pro版一次性买断，无订阅。具体价格请在APP内查看。</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">支持哪些手机？</div>
+        <div class="faq-a">Android 10及以上版本的主流品牌手机均可使用。推荐Android 11+（支持无线调试，激活更方便）。</div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>PowerGuard © 2026 | <a href="https://github.com/431144610-afk/powerguard">GitHub</a></p>
+    <p>反馈建议：在酷安评论区留言或GitHub Issues</p>
+</div>
+
+</body>
+</html>
